@@ -51,7 +51,7 @@ async def get(bot:Client,msg:Message) :
     os.remove(document)"""
 
 
-    results = YoutubeSearch(fltsearch, max_results=1).to_dict()[0]["url_suffix"]
+    result = YoutubeSearch(fltsearch, max_results=1).to_dict()[0]["url_suffix"]
     video_info = YoutubeDL().extract_info(url =f"https://youtube.com{result}",download=False)
     filename = f"{video_info['title']}.mp3"
     options={
