@@ -48,7 +48,6 @@ async def grab(bot:Client,msg:Message) :
                 'format':'bestaudio/best',
                 'keepvideo':False,
                 'outtmpl':filename,
-                "cookiefile":"../cookie.txt"
                 }
 
         with YoutubeDL(options) as ydl:
@@ -78,7 +77,6 @@ async def grab(bot:Client,msg:Message) :
                     'format':'bestaudio/best',
                     'keepvideo':False,
                     'outtmpl':filename,
-                    'cookiefile' : "../cookie.txt"
                     }
 
             with YoutubeDL(options) as ydl:
