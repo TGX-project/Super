@@ -28,7 +28,7 @@ async def grab(bot:Client,msg:Message) :
         track = sp.track(link)["name"]
         print(track)
         await bot.edit_message_text(chat_id,message.id,text="ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ  ...")
-        results = YoutubeSearch(track, max_results=1).to_dict()[0]["url_suffix"]
+        result = YoutubeSearch(track, max_results=1).to_dict()[0]["url_suffix"]
         """
         link = YouTube(f"https://youtube.com{results}")
         video = link.streams.filter(only_audio=True).first()
