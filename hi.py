@@ -1,9 +1,10 @@
-import socket
+import socket 
 from lib import config
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.settimeout(2)                                      #2 Second Timeout
-result = sock.connect_ex(('127.0.0.1',config.PORT))
-if result == 0:
-  print('port OPEN')
-else:
-  print('port CLOSED, connect_ex returned: '+str(result))
+def find_service_name(): 
+    protocolname = 'http' 
+    print ("Port: %s => service name: %s" %(port, socket.getservbyport(config.PORT, protocolname))) 
+     
+    print ("Port: %s => service name: %s" %(53, socket.getservbyport(53, 'udp'))) 
+     
+if __name__ == '__main__': 
+    find_service_name()
