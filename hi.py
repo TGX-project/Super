@@ -1,21 +1,9 @@
-import os
-import time
-import youtube_dl
-def download_ytvid_as_mp3():
-    start=time.time()
-    video_url = "https://youtu.be/4jTy5jnMkYc"
-    video_info = youtube_dl.YoutubeDL().extract_info(url = video_url,download=False)
-    filename = f"{video_info['title']}.mp3"
-    options={
-        'format':'bestaudio/best',
-        'keepvideo':False,
-        'outtmpl':filename,
-    }
-
-    with youtube_dl.YoutubeDL(options) as ydl:
-        ydl.download([video_info['webpage_url']])
-    stop = time.time()
-    print(stop-start)
-    print("Download complete... {}".format(filename))
-    os.remove(filename)
-download_ytvid_as_mp3()
+import socket
+from lib import config
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.settimeout(2)                                      #2 Second Timeout
+result = sock.connect_ex(('127.0.0.1',config.PORT))
+if result == 0:
+  print('port OPEN')
+else:
+  print('port CLOSED, connect_ex returned: '+str(result))
