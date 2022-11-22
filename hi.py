@@ -2,7 +2,7 @@ import socket
 from lib import config
 def find_service_name(): 
     protocolname = 'http' 
-    print ("Port: %s => service name: %s" %(port, socket.getservbyport(config.PORT, protocolname))) 
+    print ("Port: %s => service name: %s" %(config.PORT, socket.getservbyport(config.PORT, protocolname))) 
      
     print ("Port: %s => service name: %s" %(53, socket.getservbyport(53, 'udp'))) 
      
