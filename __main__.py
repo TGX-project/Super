@@ -10,8 +10,10 @@ from pyrogram.types.messages_and_media import Message
 from pyrogram.types import InlineQuery, InlineQueryResultArticle, InputMessageContent, InlineKeyboardButton, InlineKeyboardMarkup,CallbackQuery
 
 
+print(config.API_HASH)
 
-app = Client(config.SESSION, bot_token=config.TOKEN, api_id=config.API_ID, api_hash=config.API_HASH)
+
+app = Client(config.SESSION,api_id=int(config.API_ID),api_hash=config.API_HASH ,bot_token=config.TOKEN)
 
 
 plugins = []
@@ -35,7 +37,7 @@ async def commands(bot:Client,event:Message):
 @app.on_callback_query()
 async def callback_query(bot:Client,cb:CallbackQuery) :
     main_menu = InlineKeyboardMarkup(
-                [
+            [
                     [
                         InlineKeyboardButton("sᴇᴀʀᴄʜ",callback_data="search"),
                         InlineKeyboardButton("ɢᴇᴛ",callback_data="get"),
@@ -62,7 +64,6 @@ async def callback_query(bot:Client,cb:CallbackQuery) :
                     ]
                 ]
             )
-
 
 
     #BACK
