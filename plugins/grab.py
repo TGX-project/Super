@@ -28,21 +28,20 @@ async def grab(bot:Client,msg:Message) :
         track = sp.track(link)
         song_name = sp.track(link)["name"]
         artist = track["artists"][0]["name"]
-        await bot.edit_message_text(chat_id,message.id,text="ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ  ...")
         result = YoutubeSearch(f"{song_name} {artist}", max_results=1).to_dict()[0]["url_suffix"]
-
         video_info = YoutubeDL().extract_info(url =f"https://youtube.com{result}",download=False)
         filename = f"{video_info['title']}.mp3"
         options={
-                'format':'bestaudio/best',
-                'keepvideo':False,
-                'outtmpl':filename,
-                }
+            'format':'bestaudio/best',
+            'keepvideo':False,
+            'outtmpl':filename,
+            }
 
         with YoutubeDL(options) as ydl:
             ydl.download([video_info['webpage_url']])
         await msg.reply_document(filename,quote=False)
         os.remove(filename)
+        await bot.delete_messages(chat_id=msg.chat.id,message_ids=message.id)
 
 
 
@@ -75,7 +74,6 @@ async def grab(bot:Client,msg:Message) :
             completed += 1
             os.remove(filename)
             await bot.edit_message_text(chat_id=chat_id,message_id=message.id,text=f"ᴘʟᴇᴀsᴇ ʙᴇ ᴘᴀᴛɪᴇɴᴛ ᴛʜɪs ᴡɪʟʟ ᴛᴀᴋᴇ ᴀ ᴡʜɪʟᴇ \n\ncoмpleтed : {completed}/{len(response['items'])}")
-            #await asyncio.sleep(2)
         y = time.time()
         z = y - x
         z = str(z).split(".")[0]
