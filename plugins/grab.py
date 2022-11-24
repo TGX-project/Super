@@ -6,7 +6,7 @@ import spotipy
 from lib import config
 from yt_dlp import YoutubeDL
 from pyrogram import Client
-from youtube_search import YoutubeSearch
+from youtubesearchpython import VideosSearch
 from spotipy.oauth2 import SpotifyClientCredentials
 from pyrogram.types.messages_and_media import Message
 
@@ -28,8 +28,8 @@ async def grab(bot:Client,msg:Message) :
         track = sp.track(link)
         song_name = sp.track(link)["name"]
         artist = track["artists"][0]["name"]
-        result = YoutubeSearch(f"{song_name} {artist}", max_results=1).to_dict()[0]["url_suffix"]
-        video_info = YoutubeDL().extract_info(url =f"https://youtube.com{result}",download=False)
+        link = VideosSearch(f"{song_name} {artist}",limit=1).result()["result"][0]["link"]
+        video_info = YoutubeDL().extract_info(url =link,download=False)
         filename = f"{video_info['title']}.mp3"
         options={
             'format':'bestaudio/best',
@@ -59,8 +59,8 @@ async def grab(bot:Client,msg:Message) :
             track = sp.track(song_id)
             song_name = sp.track(song_id)["name"]
             artist = track["artists"][0]["name"]
-            result = YoutubeSearch(f"{song_name} {artist}", max_results=1).to_dict()[0]["url_suffix"]
-            video_info = YoutubeDL().extract_info(url =f"https://youtube.com{result}",download=False)
+            link = VideosSearch(f"{song_name} {artist}",limit=1).result()["result"][0]["link"]
+            video_info = YoutubeDL().extract_info(url =link,download=False)
             filename = f"{video_info['title']}.mp3"
             options={
                     'format':'bestaudio/best',
