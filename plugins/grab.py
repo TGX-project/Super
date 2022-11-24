@@ -29,6 +29,7 @@ async def grab(bot:Client,msg:Message) :
         song_name = sp.track(link)["name"]
         artist = track["artists"][0]["name"]
         link = VideosSearch(f"{song_name} {artist}",limit=1).result()["result"][0]["link"]
+        await msg.reply_text(f"{song_name}\n\n{artist}\n\n{link}")
         video_info = YoutubeDL().extract_info(url =link,download=False)
         filename = f"{video_info['title']}.mp3"
         options={
