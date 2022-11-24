@@ -71,7 +71,8 @@ async def grab(bot:Client,msg:Message) :
                 await asyncio.sleep(20)
             song_id = response["items"][i]["track"]["id"]
             track = sp.track(song_id)["name"]
-            result = YoutubeSearch(track, max_results=1).to_dict()[0]["url_suffix"]
+            artist = track["artists"][0]["name"]
+            result = YoutubeSearch(f"{track} {artist}", max_results=1).to_dict()[0]["url_suffix"]
             video_info = YoutubeDL().extract_info(url =f"https://youtube.com{result}",download=False)
             filename = f"{video_info['title']}.mp3"
             options={
