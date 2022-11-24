@@ -29,7 +29,7 @@ async def grab(bot:Client,msg:Message) :
         song_name = sp.track(link)["name"]
         artist = track["artists"][0]["name"]
         await bot.edit_message_text(chat_id,message.id,text="ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ  ...")
-        result = YoutubeSearch(f"{track} {artist}", max_results=1).to_dict()[0]["url_suffix"]
+        result = YoutubeSearch(f"{song_name} {artist}", max_results=1).to_dict()[0]["url_suffix"]
 
         video_info = YoutubeDL().extract_info(url =f"https://youtube.com{result}",download=False)
         filename = f"{video_info['title']}.mp3"
@@ -60,7 +60,7 @@ async def grab(bot:Client,msg:Message) :
             track = sp.track(song_id)
             song_name = sp.track(song_id)["name"]
             artist = track["artists"][0]["name"]
-            result = YoutubeSearch(f"{track} {artist}", max_results=1).to_dict()[0]["url_suffix"]
+            result = YoutubeSearch(f"{song_name} {artist}", max_results=1).to_dict()[0]["url_suffix"]
             video_info = YoutubeDL().extract_info(url =f"https://youtube.com{result}",download=False)
             filename = f"{video_info['title']}.mp3"
             options={
