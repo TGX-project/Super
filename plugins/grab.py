@@ -25,23 +25,11 @@ async def grab(bot:Client,msg:Message) :
         return
     if link_type == "track" :
         message = await msg.reply("ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ  ○○○")
-        track = sp.track(link)["name"]
+        track = sp.track(link)
+        song_name = sp.track(link)["name"]
         artist = track["artists"][0]["name"]
-        print(track)
         await bot.edit_message_text(chat_id,message.id,text="ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ  ...")
         result = YoutubeSearch(f"{track} {artist}", max_results=1).to_dict()[0]["url_suffix"]
-        """
-        link = YouTube(f"https://youtube.com{results}")
-        video = link.streams.filter(only_audio=True).first()
-        raw_file = video.download(output_path=".")
-        base, ext = os.path.splitext(raw_file)
-        await bot.edit_message_text(chat_id,message.id,text="sᴇɴᴅɪɴɢ ...")
-        document = f"{base}.mp3"
-        os.rename(raw_file,document)
-        await msg.reply_document(document)
-        await bot.delete_messages(chat_id,message.id)
-        os.remove(document)"""
-
 
         video_info = YoutubeDL().extract_info(url =f"https://youtube.com{result}",download=False)
         filename = f"{video_info['title']}.mp3"
@@ -69,7 +57,8 @@ async def grab(bot:Client,msg:Message) :
 
         for i in range(0,len(response["items"])):
             song_id = response["items"][i]["track"]["id"]
-            track = sp.track(song_id)["name"]
+            track = sp.track(song_id)
+            song_name = sp.track(song_id)["name"]
             artist = track["artists"][0]["name"]
             result = YoutubeSearch(f"{track} {artist}", max_results=1).to_dict()[0]["url_suffix"]
             video_info = YoutubeDL().extract_info(url =f"https://youtube.com{result}",download=False)
