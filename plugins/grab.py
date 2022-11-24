@@ -68,8 +68,6 @@ async def grab(bot:Client,msg:Message) :
         message = await msg.reply_text(f"ᴘʟᴇᴀsᴇ ʙᴇ ᴘᴀᴛɪᴇɴᴛ ᴛʜɪs ᴡɪʟʟ ᴛᴀᴋᴇ ᴀ ᴡʜɪʟᴇ .\ncompleted : {completed}/{len(response['items'])}")
 
         for i in range(0,len(response["items"])):
-            if completed%10 == 0 :
-                await asyncio.sleep(20)
             song_id = response["items"][i]["track"]["id"]
             track = sp.track(song_id)["name"]
             artist = track["artists"][0]["name"]
