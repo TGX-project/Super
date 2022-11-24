@@ -41,6 +41,6 @@ async def get(bot:Client,msg:Message) :
 
     with YoutubeDL(options) as ydl:
         ydl.download([video_info['webpage_url']])
-    await bot.edit_message_text(chat_id,message_id=message.id)
+    #await bot.edit_message_text(chat_id,message_id=message.id)
     await msg.reply_document(filename,quote=False)
     os.remove(filename)
