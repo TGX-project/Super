@@ -1,7 +1,6 @@
 
 import json
 import glob
-import requests
 import importlib
 import platform
 from lib import config
