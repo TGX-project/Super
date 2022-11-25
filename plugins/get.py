@@ -27,7 +27,7 @@ async def get(bot:Client,msg:Message) :
     except :
         await msg.reply_text("404 song not foᥙnd")
         return
-    fltsearch = f"{song_name} {artist_name}"
+    fltsearch = f"{song_name} {query} {artist_name}"
 
 
     result = YoutubeSearch(fltsearch, max_results=1).to_dict()[0]["url_suffix"]
