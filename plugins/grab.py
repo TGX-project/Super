@@ -1,4 +1,5 @@
 import os
+import pprint
 import json
 import time
 import asyncio
@@ -28,9 +29,15 @@ async def grab(bot:Client,msg:Message) :
         track = sp.track(link)
         song_name = sp.track(link)["name"]
         artist = track["artists"][0]["name"]
-        link = VideosSearch(f"{song_name} {artist}",limit=1).result()["result"][0]["link"]
-        await msg.reply_text(f"{song_name}\n\n{artist}\n\n{link}")
-        video_info = YoutubeDL().extract_info(url =link,download=False)
+        try :
+            album = track["album"]["name"]
+        except :
+            print("no")
+        if album :
+            link = VideosSearch(f"{song_name} {artist} {album}",limit=1).result()["result"][0]["link"]
+        else :
+            link = VideosSearch(f"{song_name} {artist}",limit=1).result()["result"][0]["link"]
+        video_info = YoutubeDL().extract_info(url=link,download=False)
         filename = f"{video_info['title']}.mp3"
         options={
             'format':'bestaudio/best',
@@ -60,7 +67,14 @@ async def grab(bot:Client,msg:Message) :
             track = sp.track(song_id)
             song_name = sp.track(song_id)["name"]
             artist = track["artists"][0]["name"]
-            link = VideosSearch(f"{song_name} {artist}",limit=1).result()["result"][0]["link"]
+            try :
+                album = track["album"]["name"]
+            except :
+                print("no")
+            if album :
+                link = VideosSearch(f"{song_name} {artist} {album}",limit=1).result()["result"][0]["link"]
+            else :
+                link = VideosSearch(f"{song_name} {artist}",limit=1).result()["result"][0]["link"]
             video_info = YoutubeDL().extract_info(url =link,download=False)
             filename = f"{video_info['title']}.mp3"
             options={
